@@ -16,9 +16,15 @@ Which includes testing on travis, letting it run on kubernetes as a deployment b
 
 ## How to run
 - Clone project
-- Build Dockerimage
+- Build Dockerimages
+    - Redis DB
+        - https://hub.docker.com/_/redis
+        - standard local port `6379`
+        - `docker run -p 6379:6379 --name some-redis redis`
+    - Webservice
 - Set minikube using local Docker/deploy on global docker
 - Deploy deployment File on Kubernetes/Minikube + Deployment
+- Test using the provided ClientAPI 
 ## Versions
 
 ### Packages

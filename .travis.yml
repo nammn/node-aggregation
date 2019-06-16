@@ -2,6 +2,8 @@
 dist: xenial
 
 language: go
+services:
+  - docker
 
 # Force-enable Go modules. Also force go to use the code in vendor/
 # These will both be unnecessary when Go 1.13 lands.
@@ -22,6 +24,8 @@ git:
 # in vendor/
 install: true
 
+before_install:
+  - docker pull redis
 # Don't email me the results of the test runs.
 notifications:
   email: false
@@ -37,4 +41,6 @@ before_script:
 # .golangci.yml file at the top level of your repo.
 script:
   - golangci-lint run
-  - go test -v ./...
+  - make unit-test
+  - make integration-test
+  - make clean
