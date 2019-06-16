@@ -9,7 +9,6 @@ services:
 # These will both be unnecessary when Go 1.13 lands.
 env:
   - GO111MODULE=on
-  - GOFLAGS='-mod vendor'
 
 # You don't need to test on very old versions of the Go compiler. It's the user's
 # responsibility to keep their compiler up to date.
