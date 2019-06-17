@@ -10,5 +10,13 @@ docker-start:
 unit-test: dependency
 	@go test -v -short ./...
 
+clean: docker-clean
+
 docker-clean:
-	@docker container stop $(docker container ls -aq)
+	@echo "Stopping all running containers"
+	- docker container stop `docker container ls -aq`
+	@echo "Remove all non running containers"
+	- docker rm `docker ps -q -f status=exited`
+	@echo "Delete all untagged/dangling (<none>) images"
+	- docker rmi `docker images -q -f dangling=true`
+
