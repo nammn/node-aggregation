@@ -16,14 +16,15 @@ Which includes testing on travis, letting it run on kubernetes as a deployment b
 
 ## How to run
 - Clone project
-- Build Dockerimages
+- Set minikube using local Docker/deploy on global docker
+    - `eval $(minikube docker-env)`
+- Build Dockerimages and run Images
     - Redis DB
         - https://hub.docker.com/_/redis
         - standard local port `6379`
         - `docker run -p 6379:6379 --name some-redis redis`
-    - Webservice
-- Set minikube using local Docker/deploy on global docker
-- Deploy deployment File on Kubernetes/Minikube + Deployment
+    - Webservice: Deploy deployment File on Kubernetes/Minikube
+        - `kubectl apply -f ./deployment.yaml` 
 - Test using the provided ClientAPI 
 ## Versions
 
@@ -34,11 +35,6 @@ Which includes testing on travis, letting it run on kubernetes as a deployment b
 [Picture](https://app.mural.co/t/icdretro7302/m/icdretro7302/1560497471665/f9a5f4324db66f10d3ff2991f8d60dbd8201e69d)
 [Testing](https://app.mural.co/t/icdretro7302/m/icdretro7302/1560498264807/d2413ef2ad16a8a05fe019c4ade929077f9c26da)
 
-
-## API 
-
 ## Tests
 - Travis for unit/integrationstest
 - Validate that the service is actually running
-## Running it
-
