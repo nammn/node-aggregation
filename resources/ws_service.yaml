@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    app: node-aggregation
+    tier: backend
+spec:
+  ports:
+    - port: 8000
+  selector:
+    app: node-aggregation
+    tier: backend

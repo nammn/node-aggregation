@@ -27,9 +27,13 @@ Which includes testing on travis, letting it run on kubernetes as a deployment b
         - `docker run -p 6379:6379 --name some-redis redis`
     - Webservice build Image
         - `docker build -t node-aggregation .`
-- Deploy Webservice on Minikube
+- Deploy Webservice on Minikube 
+    - go to `resources`
+        `cd ./resources/`
+    - Redis: 
+        - `kubectl apply -f ./deployment_database.yaml`
     - Webservice: Deploy deployment File on Kubernetes/Minikube
-    - `kubectl apply -f ./deployment.yaml` 
+        - `kubectl apply -f ./deployment.yaml` 
 - Test using the provided ClientAPI 
 
 ## Making sure that it is running 
@@ -60,3 +64,14 @@ Which includes testing on travis, letting it run on kubernetes as a deployment b
 ## Tests
 - Travis for unit/integrationstest
 - Validate that the service is actually running
+
+## Missing
+- Proper security mechanism (usage of secrets and security indirections)
+- Proper relation mapping between deployment of webservice and redis the DB
+- Usage of service discovery in webservice to actually discover redis
+    - currently the url is hardcoded as `localhost` 
+    - further improvement would be the usage of an env
+    - further improvement would even be service discovery
+- Proper DB mapping/user handling
+- Cobra integration is currently nothing more than a skeleton
+- Integrationtest is currently only testing the database docker integration

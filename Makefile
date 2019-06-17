@@ -6,6 +6,8 @@ integration-test: docker-start dependency
 
 docker-start:
 	@docker run -p 6379:6379 -d --name some-redis redis
+	- docker build -t node-aggregation .
+	@docker run -d -p 8000:8000 node-aggregation
 
 unit-test: dependency
 	@go test -v -short ./...

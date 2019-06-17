@@ -1,4 +1,4 @@
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-aggregation
@@ -6,6 +6,7 @@ spec:
   selector:
     matchLabels:
       app: node-aggregation
+      tier: database
   replicas: 2
   template:
     metadata:
@@ -31,3 +32,4 @@ spec:
             initialDelaySeconds: 15
             timeoutSeconds: 1
             periodSeconds: 15
+          imagePullPolicy: Never
