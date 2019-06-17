@@ -72,7 +72,19 @@ func (h *handler) NodesHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handler responsible for returning information per GET
 // Handlers: most recent POST
-//
-func (h *handler) AnalyticsHandler(w http.ResponseWriter, r *http.Request) {
+func (h *handler) AnalyticsNodesHandler(w http.ResponseWriter, r *http.Request) {
+
+	_, _ = w.Write([]byte("Hello World!\n"))
+}
+
+// Handler responsible for returning information per GET
+// Handlers: most recent POST
+func (h *handler) AnalyticProcessesHandler(w http.ResponseWriter, r *http.Request) {
+	_, _ = w.Write([]byte("Hello World!\n"))
+}
+
+// Handler responsible for returning information per GET
+// Handlers: most recent POST
+func (h *handler) AnalyticSpecificProcessHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte("Hello World!\n"))
 }

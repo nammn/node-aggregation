@@ -23,7 +23,9 @@ func main() {
 	r.HandleFunc("/health", pathHandlers.HealthCheckHandler)
 	r.HandleFunc("/v1/metrics/node/{nodename}", pathHandlers.NodeHandler).Methods("POST")
 	r.HandleFunc("/v1/metrics/nodes{nodename}/process/{processname}", pathHandlers.NodeHandler).Methods("POST")
-	r.HandleFunc("/v1/analytics", pathHandlers.AnalyticsHandler).Methods("GET")
+	r.HandleFunc("/v1/analytics/nodes/average", pathHandlers.AnalyticsNodesHandler).Methods("GET")
+	r.HandleFunc("/v1/analytics/processes", pathHandlers.AnalyticProcessesHandler).Methods("GET")
+	r.HandleFunc("/v1/analytics/processes/{processname}", pathHandlers.AnalyticSpecificProcessHandler).Methods("GET")
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8000", r))

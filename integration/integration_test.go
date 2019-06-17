@@ -15,6 +15,8 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
+//TODO: add a test which adds a value and tries to get the average
+
 type redisHandlerSuite struct {
 	RedisSuite // Embed RedisSuite struct
 }
