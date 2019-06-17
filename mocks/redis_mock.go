@@ -46,3 +46,17 @@ func (mr *MockRedisConnectionMockRecorder) SaveNodeStatValue(key interface{}) *g
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveNodeStatValue", reflect.TypeOf((*MockRedisConnection)(nil).SaveNodeStatValue), key)
 }
+
+// Ping mocks base method
+func (m *MockRedisConnection) Ping() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Ping")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Ping indicates an expected call of Ping
+func (mr *MockRedisConnectionMockRecorder) Ping() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Ping", reflect.TypeOf((*MockRedisConnection)(nil).Ping))
+}

@@ -11,14 +11,14 @@ import (
 )
 
 type handler struct {
-	client *database.RedisClient
+	Client database.RedisConnection
 }
 
 /**
-NewClient creates a handler struct with an initialized client to the database
+NewClient creates a handler struct with an initialized Client to the database
 */
-func New(client *database.RedisClient) *handler {
-	return &handler{client: client}
+func NewHandler(client database.RedisConnection) *handler {
+	return &handler{Client: client}
 }
 
 func (h *handler) HelloWorld(w http.ResponseWriter, r *http.Request) {
@@ -28,9 +28,10 @@ func (h *handler) HelloWorld(w http.ResponseWriter, r *http.Request) {
 func (h *handler) HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
-
-	// In the future we could report back on the status of our DB, or our cache
-	// (e.g. Redis) by performing a simple PING, and include them in the response.
+	err := h.Client.Ping()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 	_, _ = io.WriteString(w, `{"alive": true}`)
 }
 
@@ -52,7 +53,7 @@ func (h *handler) NodeHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	nodeStat.NodeName = vars["nodename"]
 	nodeStat.Timestamp = time.Now()
-	err = h.client.SaveNodeStatValue(nodeStat)
+	err = h.Client.SaveNodeStatValue(nodeStat)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}

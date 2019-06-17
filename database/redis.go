@@ -7,6 +7,7 @@ import (
 
 type RedisConnection interface {
 	SaveNodeStatValue(key NodeStat) error
+	Ping() error
 }
 
 type RedisClient struct {
@@ -39,5 +40,13 @@ func CreateClient(password string) (*redis.Client, error) {
 // responsible for trying to fit the values to a corresponding match in the database to save
 func (r RedisClient) SaveNodeStatValue(key NodeStat) error {
 	_, _ = fmt.Printf("node obj %+v\n", key)
+	return nil
+}
+
+func (r RedisClient) Ping() error {
+	err := r.client.Ping().Err()
+	if err != nil {
+		return err
+	}
 	return nil
 }

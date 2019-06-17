@@ -16,7 +16,7 @@ func main() {
 	if err != nil {
 		log.Fatal("problem connecting to the database")
 	}
-	pathHandlers := handlers.New(client)
+	pathHandlers := handlers.NewHandler(client)
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", pathHandlers.HelloWorld)
