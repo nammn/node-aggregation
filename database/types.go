@@ -1,12 +1,8 @@
 package database
 
-import (
-	"time"
-)
-
 // Corresponds to a Node usage in a specific time slice
 type NodeStat struct {
-	Timestamp time.Time
+	Timestamp int64
 	TimeSlice float64
 	Cpu       float64
 	Mem       float64
@@ -15,7 +11,7 @@ type NodeStat struct {
 
 // Corresponds to a Node process usage in a specific time slice
 type NodeProcessStat struct {
-	Timestamp time.Time
+	Timestamp int64
 	TimeSlice float64
 	CpuUsed   float64
 	MemUsed   float64

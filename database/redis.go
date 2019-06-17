@@ -1,8 +1,10 @@
 package database
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/go-redis/redis"
+	"github.com/pkg/errors"
 )
 
 type RedisConnection interface {
@@ -39,6 +41,14 @@ func CreateClient(password string) (*redis.Client, error) {
 
 // responsible for trying to fit the values to a corresponding match in the database to save
 func (r RedisClient) SaveNodeStatValue(key NodeStat) error {
+	if key == (NodeStat{}) {
+		return errors.New("empty parsed ns")
+	}
+	ns, err := json.Marshal(key)
+	if err != nil {
+		return nil
+	}
+	r.client.ZAdd("nodestat", redis.Z{Score: float64(key.Timestamp), Member: ns})
 	_, _ = fmt.Printf("node obj %+v\n", key)
 	return nil
 }

@@ -52,7 +52,7 @@ func (h *handler) NodeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	nodeStat.NodeName = vars["nodename"]
-	nodeStat.Timestamp = time.Now()
+	nodeStat.Timestamp = time.Now().Unix()
 	err = h.Client.SaveNodeStatValue(nodeStat)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
