@@ -12,7 +12,7 @@ import (
 Main class, responsible for creating a connection client and open the http server
 */
 func main() {
-	client, err := database.CreateClient("")
+	client, err := database.NewClient("")
 	if err != nil {
 		log.Fatal("problem connecting to the database")
 	}
