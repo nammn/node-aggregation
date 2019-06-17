@@ -17,16 +17,38 @@ Which includes testing on travis, letting it run on kubernetes as a deployment b
 ## How to run
 - Clone project
 - Set minikube using local Docker/deploy on global docker
+    - `minikube start`
     - `eval $(minikube docker-env)`
 - Build Dockerimages and run Images
     - Redis DB
         - https://hub.docker.com/_/redis
+        - `docker pull redis`
         - standard local port `6379`
         - `docker run -p 6379:6379 --name some-redis redis`
+    - Webservice build Image
+        - `docker build -t node-aggregation .`
+- Deploy Webservice on Minikube
     - Webservice: Deploy deployment File on Kubernetes/Minikube
-        - `kubectl apply -f ./deployment.yaml` 
+    - `kubectl apply -f ./deployment.yaml` 
 - Test using the provided ClientAPI 
-## Versions
+
+## Making sure that it is running 
+- using the integrationtests
+    - `make integration-test`
+- using the unit-test
+    - `make unit-test`
+- using the cobra client
+    - `go build ./client`
+    - `./client/client helloworld` -> should return `hello world`
+    - `./client/client post` -> should return 
+    `
+    {
+	"timeslice": 100,
+	"cpu": 20,
+	"mem": 20
+	}
+    ` as used in `POST`
+    
 
 ### Packages
 - Dep for dependency management

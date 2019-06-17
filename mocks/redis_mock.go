@@ -60,3 +60,17 @@ func (mr *MockRedisConnectionMockRecorder) Ping() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Ping", reflect.TypeOf((*MockRedisConnection)(nil).Ping))
 }
+
+// GetFromGivenAverage mocks base method
+func (m *MockRedisConnection) GetFromGivenAverage(timeslice float64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetFromGivenAverage", timeslice)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// GetFromGivenAverage indicates an expected call of GetFromGivenAverage
+func (mr *MockRedisConnectionMockRecorder) GetFromGivenAverage(timeslice interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFromGivenAverage", reflect.TypeOf((*MockRedisConnection)(nil).GetFromGivenAverage), timeslice)
+}

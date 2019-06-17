@@ -47,6 +47,29 @@ func seedItem(client *redis.Client, key string, value interface{}) error {
 	}
 	return client.Set(key, jybt, time.Second*30).Err()
 }
+
+func (r *redisHandlerSuite) TestHTTPSet() {
+	testkeynews := "news"
+	repo := redisHandler.NewHandler(r.Client, time.Second*30)
+	news := models.Category{
+		ID:   1,
+		Name: "News",
+		Slug: "news",
+	}
+	err := repo.Set(testkeynews, news)
+	require.NoError(r.T(), err)
+
+	jbyt, err := getItemByKey(r.Client, testkeynews)
+	require.NoError(r.T(), err)
+	require.NotNil(r.T(), jbyt)
+	var insertedData models.Category
+	err = json.Unmarshal(jbyt, &insertedData)
+	require.NoError(r.T(), err)
+	assert.Equal(r.T(), news.ID, insertedData.ID)
+	assert.Equal(r.T(), news.Name, insertedData.Name)
+	assert.Equal(r.T(), news.Slug, insertedData.Slug)
+}
+
 func (r *redisHandlerSuite) TestSet() {
 	testkeynews := "news"
 	repo := redisHandler.NewHandler(r.Client, time.Second*30)
